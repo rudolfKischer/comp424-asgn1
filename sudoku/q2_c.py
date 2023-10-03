@@ -93,6 +93,7 @@ def solve(board, step, depth=0, max_steps=None):
 
 def init_possible_val_board(board):
       global possible_val_board
+      display_possible_val_board()
       possible_val_board = [set(range(1, 5)) for _ in range(16)]
       for i in range(16):
             if board[i] != 0:
