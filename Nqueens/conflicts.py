@@ -1,7 +1,3 @@
-from concurrent.futures import ThreadPoolExecutor
-from concurrent.futures import ProcessPoolExecutor
-
-
 def row_conflicts(queens, q1_col, q2_col):
     return queens[q1_col] == queens[q2_col]
 

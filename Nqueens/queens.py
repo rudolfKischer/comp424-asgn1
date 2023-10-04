@@ -17,6 +17,23 @@ def get_queens_spaced(n):
             r = 0
     return queens
 
+def get_spaced_queens(k, m):
+    k = k+1
+    n = int(m / 2)
+    if k  <= n:
+        return 2 * k - 1
+    else:
+        return (k - n - 1) * 2
+
+def get_all_queens_spaced(m):
+    queens = [0] * m
+    n = int(m / 2)
+    for k in range(1, n+1):
+        queens[k-1] = 2*k-1
+        queens[2*n-k] = 2*n-2*k
+    return queens
+    
+
 
 class Queens():
     
@@ -31,8 +48,10 @@ class Queens():
         self.max_steps = max_steps
 
     def init_queens(self, n):
-        new_queens = get_queens_spaced(n)
-        self.queens = new_queens
+        # new_queens = get_queens_spaced(n)
+        # self.queens = new_queens
+        self.queens = get_all_queens_spaced(n)
+        # self.display()
 
     def diag_i(self, row, col):
         return row - col + self.n - 1

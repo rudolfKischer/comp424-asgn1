@@ -43,9 +43,9 @@ def test(n_max, n_min=8, test_step_size=1):
             writer.writerow([n, time])
 
 def main():
-    n = 40000
+    n = 1000000
     start = time()
-    test(n, 40, 100)
+    test(n, 10, 500)
     end = time()
     print(f'Total Time: {end - start}')
     
