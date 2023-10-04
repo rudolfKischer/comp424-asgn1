@@ -25,7 +25,14 @@ def solve_n_queens(n):
     end = time()
     print(f'N: {n}, Time: {end - start}')
     return end - start
-    
+
+
+def write_times(times):
+    with open('runtimes_table.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['n', 'time'])
+        for n, time in times.items():
+            writer.writerow([n, time])
     
 def test(n_max, n_min=8, test_step_size=1):
     # run the nquens for all sizes up to n starting at 8
@@ -36,19 +43,44 @@ def test(n_max, n_min=8, test_step_size=1):
     for i in range(n_min, n_max + 1, test_step_size):
         times[i - n_min] = solve_n_queens(i)
     
-    with open('runtimes_table.csv', 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(['n', 'time'])
-        for n, time in times.items():
-            writer.writerow([n, time])
+    write_times(times)
 
+def timed_test(max_time, step_size=1):
+    
+    n = 8
+
+    times = {}
+
+    while True:
+        time = solve_n_queens(n)
+        if time > max_time:
+            if step_size == 1:
+                break
+            else:
+                step_size //= 2
+                n -= step_size
+                continue
+        times[n] = time
+        n += step_size
+    
+    write_times(times)
+    
 def main():
     n = 1000000
     start = time()
-    test(n, 10, 500)
+    # test(n, 10, 500)
+    # end = time()
+    # print(f'Total Time: {end - start}')
+
+    # timed_test(10.0, 50)
+    n = 26702
+    start = time()
+    largest_solution = n_queens(n)
     end = time()
-    print(f'Total Time: {end - start}')
-    
+    print(f'N: {n}, Time: {end - start}')
+    print('Solution:')
+    print(largest_solution)
+
 
 if __name__ == "__main__":
     main()
